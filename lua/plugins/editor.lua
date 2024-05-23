@@ -162,9 +162,9 @@ return {
             local toggle_big_file = {
                 name = "toggle_big_file", -- name
                 opts = {
-                    defer = true, -- set to true if `disable` should be called on `BufReadPost` and not `BufReadPre`
+                    defer = true,         -- set to true if `disable` should be called on `BufReadPost` and not `BufReadPre`
                 },
-                disable = function() -- called to disable the feature
+                disable = function()      -- called to disable the feature
                     vim.g.opening_big_file = true
                     vim.b.opening_big_file = true
                 end,
@@ -175,9 +175,9 @@ return {
             }
 
             local nvim_cmp = {
-                name = "nvim_cmp", -- name
+                name = "nvim_cmp",   -- name
                 opts = {
-                    defer = true, -- set to true if `disable` should be called on `BufReadPost` and not `BufReadPre`
+                    defer = true,    -- set to true if `disable` should be called on `BufReadPost` and not `BufReadPre`
                 },
                 disable = function() -- called to disable the feature
                     vim.g.enable_nvim_cmp = false
@@ -188,9 +188,9 @@ return {
             }
 
             local codeium = {
-                name = "codeium", -- name
+                name = "codeium",    -- name
                 opts = {
-                    defer = false, -- set to true if `disable` should be called on `BufReadPost` and not `BufReadPre`
+                    defer = false,   -- set to true if `disable` should be called on `BufReadPost` and not `BufReadPre`
                 },
                 disable = function() -- called to disable the feature
                     vim.cmd([[CodeiumDisable]])
@@ -201,9 +201,9 @@ return {
             }
 
             require("bigfile").setup {
-                filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
+                filesize = 2,      -- size of the file in MiB, the plugin round file sizes to the closest MiB
                 pattern = { "*" }, -- autocmd pattern or function see <### Overriding the detection of big files>
-                features = {  -- features to disable
+                features = {       -- features to disable
                     "indent_blankline",
                     "illuminate",
                     "lsp",
@@ -219,5 +219,20 @@ return {
             }
         end
     },
+    -- }}}
+    --------------------------------------------------------------------------
+    -- {{{ gitsigns
+    { -- Adds git related signs to the gutter, as well as utilities for managing changes
+        'lewis6991/gitsigns.nvim',
+        opts = {
+            signs = {
+                add = { text = '+' },
+                change = { text = '~' },
+                delete = { text = '_' },
+                topdelete = { text = '‾' },
+                changedelete = { text = '~' },
+            },
+        }
+    }
     -- }}}
 }

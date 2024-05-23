@@ -100,8 +100,8 @@ HOME = os.getenv("HOME")
 vim.opt.number = true
 
 -- Ruler
-vim.opt.textwidth = 79
-vim.api.nvim_set_option_value("colorcolumn", "79", {})
+-- vim.opt.textwidth = 79
+-- vim.api.nvim_set_option_value("colorcolumn", "79", {})
 
 -- Highlight search results
 vim.opt.hlsearch = true
