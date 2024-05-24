@@ -310,7 +310,7 @@ return {
             local cmp = require 'cmp'
 
             cmp.setup({
-                enabled = function ()
+                enabled = function()
                     if vim.g.enable_nvim_cmp == nil then
                         vim.g.enable_nvim_cmp = true
                     end
@@ -554,4 +554,26 @@ return {
     },
     -- }}}
 
+    --------------------------------------------------------------------------
+    -- {{{ lazy git 
+    {
+        "kdheepak/lazygit.nvim",
+        cmd = {
+            "LazyGit",
+            "LazyGitConfig",
+            "LazyGitCurrentFile",
+            "LazyGitFilter",
+            "LazyGitFilterCurrentFile",
+        },
+        -- optional for floating window border decoration
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+        },
+        -- setting the keybinding for LazyGit with 'keys' is recommended in
+        -- order to load the plugin when the command is run for the first time
+        keys = {
+            { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+        }
+    }
+    -- }}}
 }
