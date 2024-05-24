@@ -269,7 +269,7 @@ return {
                             ca = {
                                 vim.lsp.buf.code_action,
                                 "Code action",
-                                mode = {"n", "v"},
+                                mode = { "n", "v" },
                                 buffer = ev.buf,
                             },
                             f = {
@@ -555,7 +555,7 @@ return {
     -- }}}
 
     --------------------------------------------------------------------------
-    -- {{{ lazy git 
+    -- {{{ lazy git
     {
         "kdheepak/lazygit.nvim",
         cmd = {
@@ -574,6 +574,23 @@ return {
         keys = {
             { "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
         }
+    },
+    -- }}}
+
+
+    --------------------------------------------------------------------------
+
+    -- {{{ lazy git
+    {
+        "kylechui/nvim-surround",
+        version = "*", -- Use for stability; omit to use `main` branch for the latest features
+        event = "VeryLazy",
+        config = function()
+            require("nvim-surround").setup({
+                -- Configuration here, or leave empty to use defaults
+            })
+        end
     }
     -- }}}
+
 }
