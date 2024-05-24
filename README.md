@@ -12,7 +12,7 @@ Then simply clone this repo directly into your Neovim configs directory:
 rm -rf ~/.config/nvim
 # removes all your previous nvim data
 # rm -rf ~/.local/share/nvim
-git ~https://github.com/anhtt20172948/nvim-configs.git /.config/nvim
+git clone https://github.com/anhtt20172948/nvim-configs.git ~/.config/nvim
 ```
 ## For Windows (on Powershell)
 ```powershell
@@ -21,7 +21,7 @@ Remove-Item -Path "~/AppData/Local/nvim" -Recurse -Force
 # removes all your previous nvim data 
 # Remove-Item -Path "~/AppData/Local/nvim-data" -Recurse -Force
 cd ~/AppData/Local/
-git clone ttps://github.com/anhtt20172948/nvim-configs.git nvim
+git clone https://github.com/anhtt20172948/nvim-configs.git nvim
 ```
 
 Done!
