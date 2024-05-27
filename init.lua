@@ -38,13 +38,13 @@ vim.opt.history = 500
 
 -- Automatically read file changes
 vim.opt.autoread = true
-vim.api.nvim_create_autocmd({"FocusGained", "BufEnter"}, {
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
     pattern = { "*" },
     command = "silent! checktime",
 })
 
 -- Unicode
-vim.opt.encoding="utf-8"
+vim.opt.encoding = "utf-8"
 
 -- No backup
 vim.opt.backup = false
@@ -52,7 +52,7 @@ vim.opt.wb = false
 vim.opt.swapfile = false
 
 -- Use system clipboard
-vim.opt.clipboard:append {"unnamed", "unnamedplus"}
+vim.opt.clipboard:append { "unnamed", "unnamedplus" }
 
 -- Disable mouse supporting for faster copying on ssh servers
 vim.opt.mouse = ""
@@ -62,9 +62,9 @@ vim.opt.expandtab = true
 vim.opt.smarttab = true
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
-vim.opt.ai = true  -- Auto indent
-vim.opt.si = true  -- Smart indent
-vim.opt.wrap = true  -- Wrap lines
+vim.opt.ai = true   -- Auto indent
+vim.opt.si = true   -- Smart indent
+vim.opt.wrap = true -- Wrap lines
 
 -- Set relative number
 vim.opt.relativenumber = true
@@ -142,7 +142,7 @@ vim.opt.laststatus = 2
 --     [[set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ PATH:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c]]
 -- )
 
--- }}} 
+-- }}}
 
 ------------------------------------------------------------------------------
 -- {{{ => Apperance
@@ -173,12 +173,12 @@ function SeeWaifu(color)
     --     'EndOfBuffer',
     --     "NvimTreeNormal", "NvimTreeNormalNC", "NvimTreePopup", -- nvim-tree
     --     "TelescopeNormal", -- telescope.nvim
-    --     'Pmenu', 'NormalFloat', 'FloatShadow', 
+    --     'Pmenu', 'NormalFloat', 'FloatShadow',
     -- }
     local hi_groups = {
         'Normal', 'NormalNC',
         "NvimTreeNormal", "NvimTreeNormalNC", -- nvim-tree
-        "TelescopeNormal" -- telescope.nvim
+        "TelescopeNormal"                     -- telescope.nvim
     }
     if color then
         vim.cmd.colorscheme(color)
@@ -186,12 +186,12 @@ function SeeWaifu(color)
 
     -- general
     for _, hi_group in pairs(hi_groups) do
-        vim.api.nvim_set_hl(0, hi_group, {bg = "none"})
+        vim.api.nvim_set_hl(0, hi_group, { bg = "none" })
     end
 end
 
 -- Set colorscheme
-vim.cmd.colorscheme("catppuccin-macchiato")
+vim.cmd.colorscheme("tokyonight")
 
 -- }}}
 
@@ -275,7 +275,7 @@ wk.register({
     },
     ["<leader>"] = {
         T = {
-            function ()
+            function()
                 if vim.g.os == "Windows_NT" then
                     vim.cmd([[:split]])
                     vim.cmd([[:resize 10]])
@@ -293,7 +293,7 @@ wk.register({
         p = {
             [["0p]],
             "Put current yanked register",
-            mode = {"n", "v"},
+            mode = { "n", "v" },
             noremap = true,
             silent = true,
         },
@@ -315,7 +315,7 @@ wk.register({
     ["<leader><Esc>"] = {
         [[:noh<cr>]],
         "Clear all highlights",
-        mode = {'n', 'v', 'o'},
+        mode = { 'n', 'v', 'o' },
         noremap = true,
         silent = true,
     },
@@ -340,7 +340,7 @@ wk.register({
     ["<leader>cp"] = {
         ToggleCopyMode,
         [[Toggle copy mode for remote]],
-        mode = {'n', 'v', 'o'},
+        mode = { 'n', 'v', 'o' },
         noremap = true,
         silent = true,
     },
@@ -383,23 +383,27 @@ end
 
 ------------------------------------------------------------------------------
 -- {{{ => Autocmd
-vim.api.nvim_create_augroup("common", {clear = true})
+vim.api.nvim_create_augroup("common", { clear = true })
 
 -- Cute cat welcomes you each time enter Vim
 vim.api.nvim_create_autocmd("VimEnter", {
-    group = "common", pattern = "*",
+    group = "common",
+    pattern = "*",
     command = [[echo "Hi >^.^<"]]
 })
 
 -- Auto save when losing focus
 vim.api.nvim_create_autocmd("FocusLost", {
-    group = "common", pattern = "*", nested = true,
+    group = "common",
+    pattern = "*",
+    nested = true,
     command = [[silent! wall]]
 })
 
 -- Auto format JSON files
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = "common", pattern = "*.json",
+    group = "common",
+    pattern = "*.json",
     command = [[:execute '%!python -m json.tool' | w]]
 })
 
@@ -412,22 +416,24 @@ function CleanExtraSpaces()
     -- vim.fn.setreg("/", old_query)
 end
 
-
 -- Auto delete trailing spaces
 vim.api.nvim_create_autocmd("BufWritePre", {
-    group = "common", pattern = "*.txt,*.js,*.py,*.wiki,*.sh,*.coffee",
+    group = "common",
+    pattern = "*.txt,*.js,*.py,*.wiki,*.sh,*.coffee",
     callback = CleanExtraSpaces
 })
 
 -- Folding vimscript by marker
 vim.api.nvim_create_autocmd("FileType", {
-    group = "common", pattern = "vim",
+    group = "common",
+    pattern = "vim",
     command = [[setlocal foldmethod=marker]]
 })
 
 -- Folding lua by marker
 vim.api.nvim_create_autocmd("FileType", {
-    group = "common", pattern = "lua",
+    group = "common",
+    pattern = "lua",
     command = [[setlocal foldmethod=marker]]
 })
 
@@ -481,3 +487,19 @@ endif
 -- {{{ => Include your own configs and plugins
 pcall(require, "my_configs")
 -- }}}
+--
+-- default config
+require('image').setup({
+  integrations = {
+    markdown = {
+      resolve_image_path = function(document_path, image_path, fallback)
+        -- document_path is the path to the file that contains the image
+        -- image_path is the potentially relative path to the image. for
+        -- markdown it's `![](this text)`
+
+        -- you can call the fallback function to get the default behavior
+        return fallback(document_path, image_path)
+      end,
+    }
+  }
+})
